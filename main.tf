@@ -20,7 +20,7 @@ resource "azurerm_virtual_network" "vnet" {
   tags = var.tags
 }
 
-resource "azurerm_subnet" "example" { 
+resource "azurerm_subnet" "vnet_subnets" { 
   for_each = var.network.subnets
 
   name                 = each.value.name
