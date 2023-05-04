@@ -41,10 +41,10 @@ variable "tags" {
 variable "network" {
   description = "Vnet definition."
   type        = object({
-    name                = string
+    name                = optional(string)
     address_space       = list(string)
     subnets             = map(object({
-      name             = string
+      name             = optional(string)
       address_prefixes = list(string)
       delegations      = optional(map(object({
         name               = string
@@ -68,13 +68,9 @@ variable "network" {
     flow_timeout_in_minutes = optional(number)
   })
   default     = {
-    name                = "azurerm-vnet"
     address_space       = ["10.0.0.0/8"]
     subnets             = {
-      subnet1 = {
-        name             = "subnet1"
-        address_prefixes = "10.0.10.0/24"
-      }
+      subnet1 = { address_prefixes = ["10.0.10.0/24"] }
     }
   }
 }

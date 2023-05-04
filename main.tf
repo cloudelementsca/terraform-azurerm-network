@@ -11,7 +11,7 @@ resource "azurerm_resource_group" "rg" {
 }
 
 resource "azurerm_virtual_network" "vnet" {
-  name                    = var.network.name
+  name                    = var.network.name != null ? var.network.name : "vnet-${random_string.random_string_vnet.result}"
   location                = azurerm_resource_group.rg.location
   resource_group_name     = azurerm_resource_group.rg.name
   address_space           = var.network.address_space
@@ -20,9 +20,13 @@ resource "azurerm_virtual_network" "vnet" {
   edge_zone               = var.network.edge_zone
   flow_timeout_in_minutes = var.network.flow_timeout_in_minutes
   
-  ddos_protection_plan {
-    id     = var.network.ddos_protection_plan.id
-    enable = var.network.ddos_protection_plan.enable
+  dynamic "ddos_protection_plan" {
+    for_each = var.network.ddos_protection_plan != null ? [var.network.ddos_protection_plan] : {}
+
+    content {
+      id     = ddos_protection_plan.value.id
+      enable = ddos_protection_plan.value.enable
+    }    
   }  
 
   tags = var.tags
@@ -31,7 +35,7 @@ resource "azurerm_virtual_network" "vnet" {
 resource "azurerm_subnet" "subnets" { 
   for_each = var.network.subnets
 
-  name                                          = each.value.name
+  name                                          = each.value.name != null ? each.value.name : "subnet-${random_string.random_string_subnets[each.key].result}"
   resource_group_name                           = azurerm_resource_group.rg.name 
   virtual_network_name                          = azurerm_virtual_network.vnet.name 
   address_prefixes                              = each.value.address_prefixes
@@ -50,4 +54,18 @@ resource "azurerm_subnet" "subnets" {
       } 
     }      
   } 
+}
+
+resource "random_string" "random_string_vnet" {
+  length  = 8
+  special = false
+  upper   = false
+}
+
+resource "random_string" "random_string_subnets" {
+  for_each = var.network.subnets
+
+  length  = 8
+  special = false
+  upper   = false
 }
