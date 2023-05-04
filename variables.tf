@@ -55,10 +55,10 @@ variable "network" {
       })))
       private_endpoint_network_policies_enabled     = optional(bool)
       private_link_service_network_policies_enabled = optional(bool)
-      service_endpoints                             = optional(list(string))
-      service_endpoint_policy_ids                   = optional(list(string))
+      service_endpoints                             = optional(list(string), [])
+      service_endpoint_policy_ids                   = optional(list(string), [])
     }))
-    dns_servers          = optional(list(string))
+    dns_servers          = optional(list(string), [])
     bgp_community        = optional(string)
     ddos_protection_plan = optional(object({
       id     = string
