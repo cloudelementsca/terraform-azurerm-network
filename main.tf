@@ -57,7 +57,7 @@ resource "azurerm_subnet" "subnets" {
 }
 
 resource "random_string" "random_string_vnet" {
-  length  = 8
+  length  = 16
   special = false
   upper   = false
 }
@@ -65,7 +65,7 @@ resource "random_string" "random_string_vnet" {
 resource "random_string" "random_string_subnets" {
   for_each = var.network.subnets
 
-  length  = 8
+  length  = 16
   special = false
   upper   = false
 }
