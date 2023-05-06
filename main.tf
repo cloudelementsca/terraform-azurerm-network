@@ -38,7 +38,7 @@ resource "azurerm_subnet" "subnets" {
   name                                          = each.value.name != null ? each.value.name : "subnet-${random_string.random_string_subnets[each.key].result}"
   resource_group_name                           = azurerm_resource_group.rg.name 
   virtual_network_name                          = azurerm_virtual_network.vnet.name 
-  address_prefixes                              = each.value.address_prefixes
+  address_prefixes                              = each.value.address_prefixes != null ? each.value.address_prefixes : azurerm_virtual_network.vnet.address_space
   private_endpoint_network_policies_enabled     = each.value.private_endpoint_network_policies_enabled
   private_link_service_network_policies_enabled = each.value.private_link_service_network_policies_enabled
   service_endpoints                             = each.value.service_endpoints

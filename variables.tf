@@ -30,8 +30,8 @@ variable "network" {
   description = "Vnet definition."
   type        = object({    
     address_space       = list(string)
-    subnets             = map(object({
-      address_prefixes = list(string)
+    subnets             = optional(map(object({
+      address_prefixes = optional(list(string))
       name             = optional(string)      
       delegations      = optional(map(object({
         name               = string
@@ -40,11 +40,11 @@ variable "network" {
           actions = list(string)
         })
       })))
-      private_endpoint_network_policies_enabled     = optional(bool)
-      private_link_service_network_policies_enabled = optional(bool)
+      private_endpoint_network_policies_enabled     = optional(bool, true)
+      private_link_service_network_policies_enabled = optional(bool, true)
       service_endpoints                             = optional(list(string), [])
       service_endpoint_policy_ids                   = optional(list(string), [])
-    }))
+    })), {subnet1 = {} })
     name                 = optional(string)
     dns_servers          = optional(list(string), [])
     bgp_community        = optional(string)
@@ -56,9 +56,6 @@ variable "network" {
     flow_timeout_in_minutes = optional(number)
   })
   default     = {
-    address_space       = ["10.0.0.0/8"]
-    subnets             = {
-      subnet1 = { address_prefixes = ["10.0.10.0/24"] }
-    }
+    address_space = ["10.0.0.0/8"]
   }
 }
