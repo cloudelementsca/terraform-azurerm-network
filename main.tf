@@ -3,17 +3,10 @@
 ## Define all module resources in this file.
 ## ---------------------------------------------------------------------------------------------------------------------
 
-
-resource "azurerm_resource_group" "rg" {
-  name     = var.resource_group_name
-  location = var.location
-  tags     = var.tags
-}
-
 resource "azurerm_virtual_network" "vnet" {
   name                    = var.network.name != null ? var.network.name : "vnet-${random_string.random_string_vnet.result}"
-  location                = azurerm_resource_group.rg.location
-  resource_group_name     = azurerm_resource_group.rg.name
+  location                = var.location
+  resource_group_name     = var.resource_group_name
   address_space           = var.network.address_space
   dns_servers             = var.network.dns_servers
   bgp_community           = var.network.bgp_community
@@ -36,7 +29,7 @@ resource "azurerm_subnet" "subnets" {
   for_each = var.network.subnets
 
   name                                          = each.value.name != null ? each.value.name : "subnet-${random_string.random_string_subnets[each.key].result}"
-  resource_group_name                           = azurerm_resource_group.rg.name 
+  resource_group_name                           = var.resource_group_name
   virtual_network_name                          = azurerm_virtual_network.vnet.name 
   address_prefixes                              = each.value.address_prefixes != null ? each.value.address_prefixes : azurerm_virtual_network.vnet.address_space
   private_endpoint_network_policies_enabled     = each.value.private_endpoint_network_policies_enabled
@@ -57,7 +50,7 @@ resource "azurerm_subnet" "subnets" {
 }
 
 resource "random_string" "random_string_vnet" {
-  length  = 16
+  length  = 8
   special = false
   upper   = false
 }
@@ -65,7 +58,7 @@ resource "random_string" "random_string_vnet" {
 resource "random_string" "random_string_subnets" {
   for_each = var.network.subnets
 
-  length  = 16
+  length  = 8
   special = false
   upper   = false
 }

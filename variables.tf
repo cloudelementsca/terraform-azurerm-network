@@ -4,27 +4,24 @@
 ## ---------------------------------------------------------------------------------------------------------------------
 
 ## ---------------------------------------------------------------------------------------------------------------------
-## OPTIONAL PARAMETERS
-## These variables have defaults and may be overridden
+## MODULE PARAMETERS
+## These variables are expected to be passed in by the operator
 ## ---------------------------------------------------------------------------------------------------------------------
 
 variable "resource_group_name" {
   description = "Name of the resource group that will contain the vnet."
   type        = string
-  default     = "azurerm-vnet-rg"
 }
 
 variable "location" {
   description = "Location for all resources."
   type        = string
-  default     = "canadacentral"
 }
 
-variable "tags" {
-  description = "Tags for all resources."
-  type        = map(string)
-  default     = { environment = "dev" }
-}
+## ---------------------------------------------------------------------------------------------------------------------
+## OPTIONAL PARAMETERS
+## These variables have defaults and may be overridden
+## ---------------------------------------------------------------------------------------------------------------------
 
 variable "network" {
   description = "Vnet definition."
@@ -59,3 +56,10 @@ variable "network" {
     address_space = ["10.0.0.0/8"]
   }
 }
+
+variable "tags" {
+  description = "Tags for all resources."
+  type        = map(string)
+  default     = { environment = "dev" }
+}
+
