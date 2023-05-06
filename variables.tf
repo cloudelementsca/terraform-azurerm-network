@@ -44,7 +44,7 @@ variable "network" {
       private_link_service_network_policies_enabled = optional(bool, true)
       service_endpoints                             = optional(list(string), [])
       service_endpoint_policy_ids                   = optional(list(string), [])
-    })), {subnet1 = {} })
+    })), { subnet1 = {} })
     name                 = optional(string)
     dns_servers          = optional(list(string), [])
     bgp_community        = optional(string)
