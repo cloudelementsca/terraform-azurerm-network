@@ -36,7 +36,7 @@ variable "network" {
           name    = string
           actions = list(string)
         })
-      })))
+      })), {})
       private_endpoint_network_policies_enabled     = optional(bool, true)
       private_link_service_network_policies_enabled = optional(bool, true)
       service_endpoints                             = optional(list(string), [])

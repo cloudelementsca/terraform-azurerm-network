@@ -38,7 +38,7 @@ resource "azurerm_subnet" "subnets" {
   service_endpoint_policy_ids                   = each.value.service_endpoint_policy_ids
     
   dynamic "delegation" { 
-    for_each = each.value.delegations
+    for_each = each.value.delegations != null ? each.value.delegations : {}
     content {
       name = delegation.value.name
       service_delegation { 
