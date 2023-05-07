@@ -31,7 +31,7 @@ variable "network" {
       address_prefixes = optional(list(string))
       name             = optional(string)      
       delegations      = optional(map(object({
-        name               = oprtional(string)
+        name               = optional(string)
         service_delegation = object({
           name    = string
           actions = list(string)
