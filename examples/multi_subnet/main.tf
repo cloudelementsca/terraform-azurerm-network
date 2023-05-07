@@ -15,7 +15,7 @@ module "network" {
   location            = azurerm_resource_group.network_rg.location
   network             = {
     address_space = ["10.19.0.0/16"]
-    subnets = {
+    subnets       = {
       pe-subnet = { 
         address_prefixes = ["10.19.1.0/24"] 
         private_endpoint_network_policies_enabled     = false
