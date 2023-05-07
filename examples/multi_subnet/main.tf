@@ -22,8 +22,8 @@ module "network" {
         private_link_service_network_policies_enabled = false
       }
       aci-subnet = {
-        address_prefixes = ["10.19.2.0/24"]
-        delegations      = {
+        address_prefixes    = ["10.19.2.0/24"]
+        service_delegations = {
           aci_delegation = {
             name    = "Microsoft.ContainerInstance/containerGroups"
             actions = [ "Microsoft.Network/virtualNetworks/subnets/join/action", "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action" ]

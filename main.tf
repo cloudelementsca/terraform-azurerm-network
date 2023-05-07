@@ -38,12 +38,12 @@ resource "azurerm_subnet" "subnets" {
   service_endpoint_policy_ids                   = each.value.service_endpoint_policy_ids
     
   dynamic "delegation" { 
-    for_each = each.value.delegations != null ? each.value.delegations : {}
+    for_each = each.value.service_delegations != null ? each.value.service_delegations : {}
     content {
-      name = delegation.value.name != null ? delegation.value.name : delegation.key
+      name = delegation.key
       service_delegation { 
-        name    = delegation.value.service_delegation.name
-        actions = delegation.value.service_delegation.actions
+        name    = delegation.value.name
+        actions = delegation.value.actions
       } 
     }      
   } 

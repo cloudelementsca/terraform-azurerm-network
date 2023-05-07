@@ -26,16 +26,13 @@ variable "location" {
 variable "network" {
   description = "Vnet definition."
   type        = object({    
-    address_space       = list(string)
-    subnets             = optional(map(object({
-      address_prefixes = optional(list(string))
-      name             = optional(string)      
-      delegations      = optional(map(object({
-        name               = optional(string)
-        service_delegation = object({
-          name    = string
-          actions = list(string)
-        })
+    address_space = list(string)
+    subnets       = optional(map(object({
+      address_prefixes    = optional(list(string))
+      name                = optional(string)      
+      service_delegations = optional(map(object({
+        name    = string
+        actions = list(string)
       })), {})
       private_endpoint_network_policies_enabled     = optional(bool)
       private_link_service_network_policies_enabled = optional(bool)
