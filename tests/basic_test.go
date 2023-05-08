@@ -2,7 +2,7 @@ package basic_test
 
 import (
 	"testing"
-
+	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -14,7 +14,7 @@ func TestBasicNetworkModule(t *testing.T) {
 		ddos_protection_plan    []string
 		dns_servers  			[]string
 		edge_zone				string
-		flow_timeout_in_minutes int
+		flow_timeout_in_minutes string
 		location				string
 		resource_group_name		string
 		timeouts				[]string
@@ -26,8 +26,8 @@ func TestBasicNetworkModule(t *testing.T) {
 		bgp_community:   		 "",
 		ddos_protection_plan:    []string{},
 		dns_servers: 			 []string{},
-		edge_zone:				 nil,
-		flow_timeout_in_minutes: nil,
+		edge_zone:				 "",
+		flow_timeout_in_minutes: "",
 		location:				 "canadacentral",
 		resource_group_name:	 "vnet-rg",
 		timeouts:				 nil,
