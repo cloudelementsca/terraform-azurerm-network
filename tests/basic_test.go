@@ -1,7 +1,7 @@
-package test
+package basic_test
 
 import (
-	"../examples/basic"
+	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
