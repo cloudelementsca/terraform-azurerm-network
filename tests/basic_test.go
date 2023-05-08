@@ -30,8 +30,8 @@ func TestBasicNetworkModule(t *testing.T) {
 		flow_timeout_in_minutes: nil,
 		location:				 "canadacentral",
 		resource_group_name:	 "vnet-rg",
-		timeouts				 nil,
-		tags					 map[string]interface{}{"environments":"dev"},
+		timeouts:				 nil,
+		tags:					 map[string]interface{}{"environments":"dev"},
 	}
 	
 	// retryable errors in terraform testing.
