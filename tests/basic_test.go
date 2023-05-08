@@ -44,6 +44,6 @@ func TestBasicNetworkModule(t *testing.T) {
 	terraform.InitAndApply(t, terraformOptions)
 
 	actualObject := VnetStruct{}
-	OutputStruct(t, terraformOptions, "vnet", &actualObject)
+	terraform.OutputStruct(t, terraformOptions, "vnet", &actualObject)
 	assert.Equal(t, expectedVnetOutput, actualObject)
 }
