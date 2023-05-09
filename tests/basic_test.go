@@ -37,7 +37,7 @@ func TestBasicNetworkModule(t *testing.T) {
 		Location:				 "canadacentral",
 		Resource_group_name:	 "vnet-rg",
 		//Timeouts:				 nil,
-		Tags:					 map[string]interface{}{"environments":"dev"},
+		Tags:					 map[string]interface{}{"environment":"dev"},
 	}
 
 //	expectedVnetOutput := `{
