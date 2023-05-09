@@ -11,33 +11,33 @@ import (
 func TestBasicNetworkModule(t *testing.T) {
 
 	type VnetStruct struct {
-		address_space    		[]string
-		bgp_community   		string
-		ddos_protection_plan    []string
-		dns_servers  			[]string
-		edge_zone				string
-		flow_timeout_in_minutes int
-		guid					string
-		id						string
-		location				string
-		resource_group_name		string
-		timeouts				[]string
-		tags					map[string]interface{}
+		Address_space    		[]string
+		Bgp_community   		string
+		Ddos_protection_plan    []string
+		Dns_servers  			[]string
+		Edge_zone				string
+		Flow_timeout_in_minutes int
+		Guid					string
+		Id						string
+		Location				string
+		Resource_group_name		string
+		Timeouts				[]string
+		Tags					map[string]interface{}
 	}
 
 	expectedVnetOutput := VnetStruct{
-		address_space:    		 []string{"10.0.0.0/8"},
-		bgp_community:   		 "",
-		ddos_protection_plan:    []string{},
-		dns_servers: 			 []string{},
-		edge_zone:				 "",
-		flow_timeout_in_minutes: 0,
-		guid:					 "",
-		id:						 "",
-		location:				 "canadacentral",
-		resource_group_name:	 "vnet-rg",
-		timeouts:				 nil,
-		tags:					 map[string]interface{}{"environments":"dev"},
+		Address_space:    		 []string{"10.0.0.0/8"},
+		Bgp_community:   		 "",
+		Ddos_protection_plan:    []string{},
+		Dns_servers: 			 []string{},
+		Edge_zone:				 "",
+		Flow_timeout_in_minutes: 0,
+		Guid:					 "",
+		Id:						 "",
+		Location:				 "canadacentral",
+		Resource_group_name:	 "vnet-rg",
+		Timeouts:				 nil,
+		Tags:					 map[string]interface{}{"environments":"dev"},
 	}
 
 //	expectedVnetOutput := `{
