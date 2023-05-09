@@ -2,10 +2,10 @@ package basic_test
 
 import (
 	"testing"
-	//"encoding/json"
+	"encoding/json"
 	"github.com/gruntwork-io/terratest/modules/terraform"
-	//"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/assert"
+	//"github.com/stretchr/testify/require"
 )
 
 func TestBasicNetworkModule(t *testing.T) {
@@ -69,7 +69,7 @@ func TestBasicNetworkModule(t *testing.T) {
 	actualObject := VnetStruct{}
 	//terraform.OutputStruct(t, terraformOptions, "vnet", &actualObject)
 	str := terraform.OutputJson(t, terraformOptions, "vnet")
-	actualObject := json.Unmarshal([]byte(str), &actualObject)
+	json.Unmarshal([]byte(str), &actualObject)
 	assert.Equal(t, expectedVnetOutput, actualObject, &actualObject)
 	//require.Equal(t, str, expectedVnetOutput, "JSON %q should match %q", expectedVnetOutput, str)
 }
