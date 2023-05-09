@@ -64,7 +64,7 @@ func TestBasicNetworkModule(t *testing.T) {
 
 	//actualObject := VnetStruct{}
 	//terraform.OutputStruct(t, terraformOptions, "vnet", &actualObject)
-	str := terraform.OutputJson(t, terraformOptions, "")
+	str := terraform.OutputJson(t, terraformOptions, "vnet")
 	//assert.Equal(t, expectedVnetOutput, actualObject, &actualObject)
 	require.Equal(t, str, expectedVnetOutput, "JSON %q should match %q", expectedVnetOutput, str)
 }
