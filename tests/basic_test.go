@@ -17,11 +17,11 @@ func TestBasicNetworkModule(t *testing.T) {
 		Dns_servers  			[]string
 		Edge_zone				string
 		Flow_timeout_in_minutes int
-		Guid					string
-		Id						string
+		//Guid					string
+		//Id						string
 		Location				string
 		Resource_group_name		string
-		Timeouts				[]string
+		//Timeouts				[]string
 		Tags					map[string]interface{}
 	}
 
@@ -32,11 +32,11 @@ func TestBasicNetworkModule(t *testing.T) {
 		Dns_servers: 			 []string{},
 		Edge_zone:				 "",
 		Flow_timeout_in_minutes: 0,
-		Guid:					 "",
-		Id:						 "",
+		//Guid:					 "",
+		//Id:						 "",
 		Location:				 "canadacentral",
 		Resource_group_name:	 "vnet-rg",
-		Timeouts:				 nil,
+		//Timeouts:				 nil,
 		Tags:					 map[string]interface{}{"environments":"dev"},
 	}
 
