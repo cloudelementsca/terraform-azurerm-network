@@ -2,9 +2,9 @@ package basic_test
 
 import (
 	"testing"
-	"encoding/json"
+	//"encoding/json"
 	"github.com/gruntwork-io/terratest/modules/terraform"
-	"github.com/stretchr/testify/assert"
+	//"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
