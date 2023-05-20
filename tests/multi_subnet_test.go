@@ -1,4 +1,4 @@
-package basic_test
+package multi_subnet_test
 
 import (
 	"encoding/json"
