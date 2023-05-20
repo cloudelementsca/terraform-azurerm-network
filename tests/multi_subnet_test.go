@@ -24,6 +24,8 @@ type ServiceDelegationStruct struct {
 	Actions []string
 }
 
+// https://www.reddit.com/r/golang/comments/p2ajjw/getting_specific_nested_json_values/
+
 type SubnetStruct struct {
 	Address_prefixes                              []string
 	Delegation                                    []ServiceDelegationStruct
@@ -85,7 +87,7 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 	assert.Equal(t, expectedVnetOutput, actualVnetObject, &actualVnetObject)
 
 	actualPeSubnetOutput := SubnetStruct{}
-	strPeSubnet := terraform.OutputJson(t, terraformOptions, "subnets[pe-subnet]")
+	strPeSubnet := terraform.OutputJson(t, terraformOptions, "subnets")
 	json.Unmarshal([]byte(strPeSubnet), &actualPeSubnetOutput)
 	assert.Equal(t, expectedPeSubnetOutupt, actualPeSubnetOutput, &actualPeSubnetOutput)
 
