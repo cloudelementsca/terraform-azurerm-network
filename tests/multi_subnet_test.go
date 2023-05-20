@@ -45,31 +45,31 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 		Tags:                    map[string]interface{}{"environment": "dev"},
 	}
 
-	expectedPeSubnetOutupt := SubnetStruct{
-		Address_prefixes: []string{"10.19.1.0/24"},
-		Delegation:       []ServiceDelegationStruct{},
-		Private_endpoint_network_policies_enabled:     false,
-		Private_link_service_network_policies_enabled: false,
-	}
-
-	expectedAciSubnetOutupt := SubnetStruct{
-		Address_prefixes: []string{"10.19.2.0/24"},
-		Delegation: []ServiceDelegationStruct{
-			{
-				Name:    "Microsoft.ContainerInstance/containerGroups",
-				Actions: []string{"Microsoft.Network/virtualNetworks/subnets/join/action", "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action"},
-			},
-		},
-		Private_endpoint_network_policies_enabled:     true,
-		Private_link_service_network_policies_enabled: true,
-	}
-
-	expectedFeSubnetOutupt := SubnetStruct{
-		Address_prefixes: []string{"10.19.3.0/24"},
-		Delegation:       []DelegationStruct{},
-		Private_endpoint_network_policies_enabled:     true,
-		Private_link_service_network_policies_enabled: true,
-	}
+	//	expectedPeSubnetOutupt := SubnetStruct{
+	//		Address_prefixes: []string{"10.19.1.0/24"},
+	//		Delegation:       []ServiceDelegationStruct{},
+	//		Private_endpoint_network_policies_enabled:     false,
+	//		Private_link_service_network_policies_enabled: false,
+	//	}
+	//
+	//	expectedAciSubnetOutupt := SubnetStruct{
+	//		Address_prefixes: []string{"10.19.2.0/24"},
+	//		Delegation: []ServiceDelegationStruct{
+	//			{
+	//				Name:    "Microsoft.ContainerInstance/containerGroups",
+	//				Actions: []string{"Microsoft.Network/virtualNetworks/subnets/join/action", "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action"},
+	//			},
+	//		},
+	//		Private_endpoint_network_policies_enabled:     true,
+	//		Private_link_service_network_policies_enabled: true,
+	//	}
+	//
+	//	expectedFeSubnetOutupt := SubnetStruct{
+	//		Address_prefixes: []string{"10.19.3.0/24"},
+	//		Delegation:       []ServiceDelegationStruct{},
+	//		Private_endpoint_network_policies_enabled:     true,
+	//		Private_link_service_network_policies_enabled: true,
+	//	}
 
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 		TerraformDir: "../examples/multi_subnet",
