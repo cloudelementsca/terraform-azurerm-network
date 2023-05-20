@@ -87,6 +87,6 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 	actualPeSubnetOutput := SubnetStruct{}
 	strPeSubnet := terraform.OutputJson(t, terraformOptions, "subnets[pe-subnet]")
 	json.Unmarshal([]byte(strPeSubnet), &actualPeSubnetOutput)
-	assert.Equal(t, expectedPeSubnetOutupt, actualObject, &actualPeSubnetOutput)
+	assert.Equal(t, expectedPeSubnetOutupt, actualPeSubnetOutput, &actualPeSubnetOutput)
 
 }
