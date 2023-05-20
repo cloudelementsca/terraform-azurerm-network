@@ -7,36 +7,36 @@ import (
 	"testing"
 )
 
+type VnetStruct struct {
+	Address_space           []string
+	Bgp_community           string
+	Ddos_protection_plan    []string
+	Dns_servers             []string
+	Edge_zone               string
+	Flow_timeout_in_minutes int
+	Location                string
+	Resource_group_name     string
+	Tags                    map[string]interface{}
+}
+
+type ServiceDelegationStruct struct {
+	Name    string
+	Actions []string
+}
+
+type DelegationStruct struct {
+	Name               string
+	Service_delegation []ServiceDelegationStruct
+}
+
+type SubnetStruct struct {
+	Address_prefixes                              []string
+	Delegation                                    []DelegationStruct
+	Private_endpoint_network_policies_enabled     bool
+	Private_link_service_network_policies_enabled bool
+}
+
 func TestBasicNetworkModule(t *testing.T) {
-
-	type VnetStruct struct {
-		Address_space           []string
-		Bgp_community           string
-		Ddos_protection_plan    []string
-		Dns_servers             []string
-		Edge_zone               string
-		Flow_timeout_in_minutes int
-		Location                string
-		Resource_group_name     string
-		Tags                    map[string]interface{}
-	}
-
-	type ServiceDelegationStruct struct {
-		Name    string
-		Actions []string
-	}
-
-	type DelegationStruct struct {
-		Name               string
-		Service_delegation []ServiceDelegationStruct
-	}
-
-	type SubnetStruct struct {
-		Address_prefixes                              []string
-		Delegation                                    []DelegationStruct
-		Private_endpoint_network_policies_enabled     bool
-		Private_link_service_network_policies_enabled bool
-	}
 
 	expectedVnetOutput := VnetStruct{
 		Address_space:           []string{"10.19.0.0/16"},
@@ -50,11 +50,31 @@ func TestBasicNetworkModule(t *testing.T) {
 		Tags:                    map[string]interface{}{"environment": "dev"},
 	}
 
-	expectedPeSubnetOutupt := SubnetStruct{}
+	expectedPeSubnetOutupt := SubnetStruct{
+		Address_prefixes: []string{"10.19.1.0/24"},
+		Delegation:       []DelegationStruct{},
+		Private_endpoint_network_policies_enabled:     false,
+		Private_link_service_network_policies_enabled: false,
+	}
 
-	expectedFeSubnetOutupt := SubnetStruct{}
+	expectedAciSubnetOutupt := SubnetStruct{
+		Address_prefixes: []string{"10.19.2.0/24"},
+		Delegation: []DelegationStruct{
+			Service_delegation: []ServiceDelegationStruct{
+				Name:    "Microsoft.ContainerInstance/containerGroups",
+				Actions: []string{"Microsoft.Network/virtualNetworks/subnets/join/action", "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action"},
+			},
+		},
+		Private_endpoint_network_policies_enabled:     true,
+		Private_link_service_network_policies_enabled: true,
+	}
 
-	expectedAciSubnetOutupt := SubnetStruct{}
+	expectedFeSubnetOutupt := SubnetStruct{
+		Address_prefixes: []string{"10.19.3.0/24"},
+		Delegation:       []DelegationStruct{},
+		Private_endpoint_network_policies_enabled:     true,
+		Private_link_service_network_policies_enabled: true,
+	}
 
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 		TerraformDir: "../examples/multi_subnet",
