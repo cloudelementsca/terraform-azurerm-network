@@ -45,13 +45,13 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 		Tags:                    map[string]interface{}{"environment": "dev"},
 	}
 
-	//	expectedPeSubnetOutupt := SubnetStruct{
-	//		Address_prefixes: []string{"10.19.1.0/24"},
-	//		Delegation:       []ServiceDelegationStruct{},
-	//		Private_endpoint_network_policies_enabled:     false,
-	//		Private_link_service_network_policies_enabled: false,
-	//	}
-	//
+	expectedPeSubnetOutupt := SubnetStruct{
+		Address_prefixes: []string{"10.19.1.0/24"},
+		Delegation:       []ServiceDelegationStruct{},
+		Private_endpoint_network_policies_enabled:     false,
+		Private_link_service_network_policies_enabled: false,
+	}
+
 	//	expectedAciSubnetOutupt := SubnetStruct{
 	//		Address_prefixes: []string{"10.19.2.0/24"},
 	//		Delegation: []ServiceDelegationStruct{
@@ -79,9 +79,14 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 
 	terraform.InitAndApply(t, terraformOptions)
 
-	actualObject := VnetStruct{}
-	str := terraform.OutputJson(t, terraformOptions, "vnet")
-	json.Unmarshal([]byte(str), &actualObject)
-	assert.Equal(t, expectedVnetOutput, actualObject, &actualObject)
+	actualVnetObject := VnetStruct{}
+	strVnet := terraform.OutputJson(t, terraformOptions, "vnet")
+	json.Unmarshal([]byte(strVnet), &actualVnetObject)
+	assert.Equal(t, expectedVnetOutput, actualVnetObject, &actualVnetObject)
+
+	actualPeSubnetOutput := SubnetStruct{}
+	strPeSubnet := terraform.OutputJson(t, terraformOptions, "subnets[pe-subnet]")
+	json.Unmarshal([]byte(strPeSubnet), &actualPeSubnetOutput)
+	assert.Equal(t, expectedPeSubnetOutupt, actualObject, &actualPeSubnetOutput)
 
 }
