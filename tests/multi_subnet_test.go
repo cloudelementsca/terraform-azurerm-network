@@ -96,6 +96,5 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 
 	var subnets Subnets
 	json.Unmarshal([]byte(strSubnets), &subnets)
-	fmt.Println(subnets)
-
+	fmt.Println(subnets["pe-subnet"])
 }
