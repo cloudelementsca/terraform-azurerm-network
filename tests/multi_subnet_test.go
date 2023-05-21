@@ -2,10 +2,10 @@ package network_tests
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/assert"
 	"testing"
-	"fmt"
 )
 
 type VnetStruct struct {
@@ -29,7 +29,7 @@ type ServiceDelegationStruct struct {
 
 type SubnetStruct struct {
 	Address_prefixes                              []string
-	Delegation                                    []interface
+	Delegation                                    []interface{}
 	Private_endpoint_network_policies_enabled     bool
 	Private_link_service_network_policies_enabled bool
 }
@@ -92,7 +92,7 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 	//json.Unmarshal([]byte(strSubnets), &actualPeSubnetOutput)
 	//assert.Equal(t, expectedPeSubnetOutupt, actualPeSubnetOutput, &actualPeSubnetOutput)
 
-	var subnets interface {}
+	var subnets interface{}
 	json.Unmarshal([]byte(strSubnets), &subnets)
 	fmt.Println(subnets)
 
