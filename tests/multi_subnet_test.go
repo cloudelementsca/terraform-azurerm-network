@@ -94,7 +94,8 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 	//json.Unmarshal([]byte(strSubnets), &actualPeSubnetOutput)
 	//assert.Equal(t, expectedPeSubnetOutupt, actualPeSubnetOutput, &actualPeSubnetOutput)
 
-	var subnets Subnets
+	subnets := Subnets{}
 	json.Unmarshal([]byte(strSubnets), &subnets)
-	fmt.Println(subnets["pe-subnet"])
+	fmt.Println(subnets.Subnets["pe-subnet"])
+	assert.Equal(t, expectedPeSubnetOutupt, actualPeSubnetOutput, &actualPeSubnetOutput)
 }
