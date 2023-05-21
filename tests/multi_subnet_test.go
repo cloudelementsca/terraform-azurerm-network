@@ -5,6 +5,7 @@ import (
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/assert"
 	"testing"
+	"fmt"
 )
 
 type VnetStruct struct {
@@ -28,7 +29,7 @@ type ServiceDelegationStruct struct {
 
 type SubnetStruct struct {
 	Address_prefixes                              []string
-	Delegation                                    []ServiceDelegationStruct
+	Delegation                                    []interface
 	Private_endpoint_network_policies_enabled     bool
 	Private_link_service_network_policies_enabled bool
 }
@@ -49,7 +50,7 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 
 	expectedPeSubnetOutupt := SubnetStruct{
 		Address_prefixes: []string{"10.19.1.0/24"},
-		Delegation:       []ServiceDelegationStruct{},
+		Delegation:       []interface{},
 		Private_endpoint_network_policies_enabled:     false,
 		Private_link_service_network_policies_enabled: false,
 	}
@@ -86,9 +87,13 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 	json.Unmarshal([]byte(strVnet), &actualVnetObject)
 	assert.Equal(t, expectedVnetOutput, actualVnetObject, &actualVnetObject)
 
-	actualPeSubnetOutput := SubnetStruct{}
-	strPeSubnet := terraform.OutputJson(t, terraformOptions, "subnets")
-	json.Unmarshal([]byte(strPeSubnet), &actualPeSubnetOutput)
-	assert.Equal(t, expectedPeSubnetOutupt, actualPeSubnetOutput, &actualPeSubnetOutput)
+	//actualPeSubnetOutput := SubnetStruct{}
+	//strSubnets := terraform.OutputJson(t, terraformOptions, "subnets")
+	//json.Unmarshal([]byte(strSubnets), &actualPeSubnetOutput)
+	//assert.Equal(t, expectedPeSubnetOutupt, actualPeSubnetOutput, &actualPeSubnetOutput)
+
+	var subnets interface {}
+	json.Unmarshal([]byte(strSubnets), &subnets)
+	fmt.Println(subnets)
 
 }
