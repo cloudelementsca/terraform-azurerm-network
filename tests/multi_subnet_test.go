@@ -25,13 +25,15 @@ type ServiceDelegationStruct struct {
 	Actions []string
 }
 
-// https://www.reddit.com/r/golang/comments/p2ajjw/getting_specific_nested_json_values/
-
 type SubnetStruct struct {
 	Address_prefixes                              []string
 	Delegation                                    []interface{}
 	Private_endpoint_network_policies_enabled     bool
 	Private_link_service_network_policies_enabled bool
+}
+
+type Subnets struct {
+	Subnets map[string]SubnetStruct
 }
 
 func TestMultiSubnetNetworkModule(t *testing.T) {
@@ -92,7 +94,7 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 	//json.Unmarshal([]byte(strSubnets), &actualPeSubnetOutput)
 	//assert.Equal(t, expectedPeSubnetOutupt, actualPeSubnetOutput, &actualPeSubnetOutput)
 
-	var subnets interface{}
+	var subnets Subnets
 	json.Unmarshal([]byte(strSubnets), &subnets)
 	fmt.Println(subnets)
 
