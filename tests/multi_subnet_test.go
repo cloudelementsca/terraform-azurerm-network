@@ -48,12 +48,12 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 		Tags:                    map[string]interface{}{"environment": "dev"},
 	}
 
-	expectedPeSubnetOutupt := SubnetStruct{
-		Address_prefixes: []string{"10.19.1.0/24"},
-		Delegation:       []interface{},
-		Private_endpoint_network_policies_enabled:     false,
-		Private_link_service_network_policies_enabled: false,
-	}
+	//expectedPeSubnetOutupt := SubnetStruct{
+	//	Address_prefixes: []string{"10.19.1.0/24"},
+	//	Delegation:       []interface{},
+	//	Private_endpoint_network_policies_enabled:     false,
+	//	Private_link_service_network_policies_enabled: false,
+	//}
 
 	//	expectedAciSubnetOutupt := SubnetStruct{
 	//		Address_prefixes: []string{"10.19.2.0/24"},
