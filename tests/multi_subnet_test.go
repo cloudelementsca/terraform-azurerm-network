@@ -50,12 +50,12 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 		Tags:                    map[string]interface{}{"environment": "dev"},
 	}
 
-	//expectedPeSubnetOutupt := SubnetStruct{
-	//	Address_prefixes: []string{"10.19.1.0/24"},
-	//	Delegation:       []interface{},
-	//	Private_endpoint_network_policies_enabled:     false,
-	//	Private_link_service_network_policies_enabled: false,
-	//}
+	expectedPeSubnetOutupt := SubnetStruct{
+		Address_prefixes: []string{"10.19.1.0/24"},
+		Delegation:       []interface{},
+		Private_endpoint_network_policies_enabled:     false,
+		Private_link_service_network_policies_enabled: false,
+	}
 
 	//	expectedAciSubnetOutupt := SubnetStruct{
 	//		Address_prefixes: []string{"10.19.2.0/24"},
@@ -97,6 +97,7 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 	subnets := map[string]SubnetStruct{}
 	json.Unmarshal([]byte(strSubnets), &subnets)
 	fmt.Println(subnets["pe-subnet"])
+	assert.Equal(t, expectedPeSubnetOutupt, subnets["pe-subnet"], &subnets)
 	fmt.Println(subnets["fe-subnet"])
 	fmt.Println(subnets["aci-subnet"])
 	fmt.Println(subnets["aci-subnet"].Delegation[0])
