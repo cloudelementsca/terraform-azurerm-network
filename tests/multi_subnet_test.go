@@ -71,7 +71,7 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 
 	expectedFeSubnetOutupt := SubnetStruct{
 		Address_prefixes: []string{"10.19.3.0/24"},
-		Delegation:       []ServiceDelegationStruct{},
+		Delegation:       []interface{}{},
 		Private_endpoint_network_policies_enabled:     true,
 		Private_link_service_network_policies_enabled: true,
 	}
@@ -97,9 +97,9 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 	subnets := map[string]SubnetStruct{}
 	json.Unmarshal([]byte(strSubnets), &subnets)
 	fmt.Println(subnets["pe-subnet"])
-	assert.Equal(t, expectedPeSubnetOutupt, subnets["pe-subnet"], ("Didn't match: " + &subnets))
+	assert.Equal(t, expectedPeSubnetOutupt, subnets["pe-subnet"], &subnets)
 	fmt.Println(subnets["fe-subnet"])
-	assert.Equal(t, expectedFeSubnetOutupt, subnets["fe-subnet"], ("Didn't match: " + &subnets))
+	assert.Equal(t, expectedFeSubnetOutupt, subnets["fe-subnet"], &subnets)
 	fmt.Println(subnets["aci-subnet"])
 	fmt.Println(subnets["aci-subnet"].Delegation[0])
 }
