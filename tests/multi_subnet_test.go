@@ -99,4 +99,5 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 	fmt.Println(subnets["pe-subnet"])
 	fmt.Println(subnets["fe-subnet"])
 	fmt.Println(subnets["aci-subnet"])
+	fmt.Println(subnets["aci-subnet"].Delegation["aci_delegation"])
 }
