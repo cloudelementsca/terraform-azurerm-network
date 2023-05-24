@@ -20,25 +20,21 @@ type VnetStruct struct {
 	Tags                    map[string]interface{}
 }
 
-type ServiceDelegationStruct struct {
+type ServiceDelegation struct {
 	Name    string
 	Actions []string
 }
 
 type Delegation struct {
 	Name               string
-	Service_delegation []ServiceDelegationStruct
+	Service_delegation []ServiceDelegation
 }
 
-type SubnetStruct struct {
+type Subnet struct {
 	Address_prefixes                              []string
 	Delegation                                    []Delegation
 	Private_endpoint_network_policies_enabled     bool
 	Private_link_service_network_policies_enabled bool
-}
-
-type Subnets struct {
-	Subnets map[string]SubnetStruct
 }
 
 func TestMultiSubnetNetworkModule(t *testing.T) {
@@ -55,19 +51,19 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 		Tags:                    map[string]interface{}{"environment": "dev"},
 	}
 
-	expectedPeSubnetOutupt := SubnetStruct{
+	expectedPeSubnetOutupt := Subnet{
 		Address_prefixes: []string{"10.19.1.0/24"},
 		Delegation:       []Delegation{},
 		Private_endpoint_network_policies_enabled:     false,
 		Private_link_service_network_policies_enabled: false,
 	}
 
-	expectedAciSubnetOutupt := SubnetStruct{
+	expectedAciSubnetOutupt := Subnet{
 		Address_prefixes: []string{"10.19.2.0/24"},
 		Delegation: []Delegation{
 			{
 				Name: "aci_delegation",
-				Service_delegation: []ServiceDelegationStruct{
+				Service_delegation: []ServiceDelegation{
 					{
 						Name:    "Microsoft.ContainerInstance/containerGroups",
 						Actions: []string{"Microsoft.Network/virtualNetworks/subnets/join/action", "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action"},
@@ -79,7 +75,7 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 		Private_link_service_network_policies_enabled: true,
 	}
 
-	expectedFeSubnetOutupt := SubnetStruct{
+	expectedFeSubnetOutupt := Subnet{
 		Address_prefixes: []string{"10.19.3.0/24"},
 		Delegation:       []Delegation{},
 		Private_endpoint_network_policies_enabled:     true,
@@ -99,12 +95,9 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 	json.Unmarshal([]byte(strVnet), &actualVnetObject)
 	assert.Equal(t, expectedVnetOutput, actualVnetObject, &actualVnetObject)
 
-	//actualPeSubnetOutput := SubnetStruct{}
 	strSubnets := terraform.OutputJson(t, terraformOptions, "subnets")
-	//json.Unmarshal([]byte(strSubnets), &actualPeSubnetOutput)
-	//assert.Equal(t, expectedPeSubnetOutupt, actualPeSubnetOutput, &actualPeSubnetOutput)
 
-	subnets := map[string]SubnetStruct{}
+	subnets := map[string]Subnet{}
 	json.Unmarshal([]byte(strSubnets), &subnets)
 	fmt.Println(subnets["pe-subnet"])
 	assert.Equal(t, expectedPeSubnetOutupt, subnets["pe-subnet"], &subnets)
