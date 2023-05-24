@@ -57,7 +57,7 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 
 	expectedPeSubnetOutupt := SubnetStruct{
 		Address_prefixes: []string{"10.19.1.0/24"},
-		Delegation:       []Delegation{}{},
+		Delegation:       []Delegation{},
 		Private_endpoint_network_policies_enabled:     false,
 		Private_link_service_network_policies_enabled: false,
 	}
@@ -77,7 +77,7 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 
 	expectedFeSubnetOutupt := SubnetStruct{
 		Address_prefixes: []string{"10.19.3.0/24"},
-		Delegation:       []Delegation{}{},
+		Delegation:       []Delegation{},
 		Private_endpoint_network_policies_enabled:     true,
 		Private_link_service_network_policies_enabled: true,
 	}
