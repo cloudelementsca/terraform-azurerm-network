@@ -64,15 +64,15 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 
 	expectedAciSubnetOutupt := SubnetStruct{
 		Address_prefixes: []string{"10.19.2.0/24"},
-		Delegation: []Delegation{			
+		Delegation: []Delegation{
 			{
-				Name: "aci_delegation"
-				Service_delegation: []ServiceDelegationStruct{		
+				Name: "aci_delegation",
+				Service_delegation: []ServiceDelegationStruct{
 					{
 						Name:    "Microsoft.ContainerInstance/containerGroups",
 						Actions: []string{"Microsoft.Network/virtualNetworks/subnets/join/action", "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action"},
-					},		
-				},		
+					},
+				},
 			},
 		},
 		Private_endpoint_network_policies_enabled:     true,
