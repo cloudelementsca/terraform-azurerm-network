@@ -25,12 +25,14 @@ type ServiceDelegationStruct struct {
 	Actions []string
 }
 
+type Delegation struct {
+	Name               string
+	Service_delegation []ServiceDelegationStruct
+}
+
 type SubnetStruct struct {
 	Address_prefixes                              []string
-	Delegation                                    []interface{
-		Name 				string
-		Service_delegation	[]ServiceDelegationStruct
-	}
+	Delegation                                    []Delegation
 	Private_endpoint_network_policies_enabled     bool
 	Private_link_service_network_policies_enabled bool
 }
@@ -55,7 +57,7 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 
 	expectedPeSubnetOutupt := SubnetStruct{
 		Address_prefixes: []string{"10.19.1.0/24"},
-		Delegation:       []interface{}{},
+		Delegation:       []Delegation{}{},
 		Private_endpoint_network_policies_enabled:     false,
 		Private_link_service_network_policies_enabled: false,
 	}
@@ -63,7 +65,7 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 	//expectedAciSubnetOutupt := SubnetStruct{
 	//	Address_prefixes: []string{"10.19.2.0/24"},
 	//	Delegation: []interface{}{
-	//		
+	//
 	//		{
 	//			Name:    "Microsoft.ContainerInstance/containerGroups",
 	//			Actions: []string{"Microsoft.Network/virtualNetworks/subnets/join/action", "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action"},
@@ -75,7 +77,7 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 
 	expectedFeSubnetOutupt := SubnetStruct{
 		Address_prefixes: []string{"10.19.3.0/24"},
-		Delegation:       []interface{}{},
+		Delegation:       []Delegation{}{},
 		Private_endpoint_network_policies_enabled:     true,
 		Private_link_service_network_policies_enabled: true,
 	}
