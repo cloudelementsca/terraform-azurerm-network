@@ -62,18 +62,22 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 		Private_link_service_network_policies_enabled: false,
 	}
 
-	//expectedAciSubnetOutupt := SubnetStruct{
-	//	Address_prefixes: []string{"10.19.2.0/24"},
-	//	Delegation: []interface{}{
-	//
-	//		{
-	//			Name:    "Microsoft.ContainerInstance/containerGroups",
-	//			Actions: []string{"Microsoft.Network/virtualNetworks/subnets/join/action", "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action"},
-	//		},
-	//	},
-	//	Private_endpoint_network_policies_enabled:     true,
-	//	Private_link_service_network_policies_enabled: true,
-	//}
+	expectedAciSubnetOutupt := SubnetStruct{
+		Address_prefixes: []string{"10.19.2.0/24"},
+		Delegation: []Delegation{			
+			{
+				Name: "aci_delegation"
+				Service_delegation: []ServiceDelegationStruct{		
+					{
+						Name:    "Microsoft.ContainerInstance/containerGroups",
+						Actions: []string{"Microsoft.Network/virtualNetworks/subnets/join/action", "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action"},
+					},		
+				},		
+			},
+		},
+		Private_endpoint_network_policies_enabled:     true,
+		Private_link_service_network_policies_enabled: true,
+	}
 
 	expectedFeSubnetOutupt := SubnetStruct{
 		Address_prefixes: []string{"10.19.3.0/24"},
@@ -108,4 +112,5 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 	assert.Equal(t, expectedFeSubnetOutupt, subnets["fe-subnet"], &subnets)
 	fmt.Println(subnets["aci-subnet"])
 	fmt.Println(subnets["aci-subnet"].Delegation[0])
+	assert.Equal(t, expectedAciSubnetOutupt, subnets["aci-subnet"], &subnets)
 }
