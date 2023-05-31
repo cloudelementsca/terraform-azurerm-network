@@ -66,7 +66,7 @@ func TestMultiSubnetNetworkModule(t *testing.T) {
 				Service_delegation: []ServiceDelegation{
 					{
 						Name:    "Microsoft.ContainerInstance/containerGroups",
-						Actions: []string{"Microsoft.Network/virtualNetworks/subnets/join/action", "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action"},
+						Actions: []string{"Microsoft.Network/virtualNetworks/subnets/action"},
 					},
 				},
 			},
