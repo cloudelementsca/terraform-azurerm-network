@@ -2,7 +2,6 @@ package network_tests
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/assert"
 	"testing"
