@@ -1,6 +1,6 @@
 # terraform-azurerm-network
 ## Description
-This module creates an Azure virtual network in a resource group and location that you specify. It's highly adjustable and takes the same input variables as `azurerm_virtual_network` and `azurerm_subnet` resource definitions have attributes.
+This module creates an Azure virtual network in a resource group and location that you specify. It's highly adjustable and takes the same input variables as `azurerm_virtual_network` and `azurerm_subnet` resource definitions have attributes. All attributes for the vnet and subnets are optional. The vnet output variables are maps containing all the information for the vnet and each subnet
 
 ## Using the Module
 See the `examples/` folders on how to use the module.
@@ -141,3 +141,60 @@ Description: All subnets info.
 ### <a name="output_vnet"></a> [vnet](#output\_vnet)
 
 Description: All vnet info.
+
+### Sample Output
+
+```hcl
+subnets = {
+  "aci-subnet" = {
+    "address_prefixes" = tolist([
+      "10.19.2.0/24",
+    ])
+    "delegation" = tolist([
+      {
+        "name" = "aci_delegation"
+        "service_delegation" = tolist([
+          {
+            "actions" = tolist([
+              "Microsoft.Network/virtualNetworks/subnets/action",
+            ])
+            "name" = "Microsoft.ContainerInstance/containerGroups"
+          },
+        ])
+      },
+    ])
+    "enforce_private_link_endpoint_network_policies" = false
+    "enforce_private_link_service_network_policies" = false
+    "id" = "/subscriptions/***/resourceGroups/vnet-rg/providers/Microsoft.Network/virtualNetworks/vnet-vwtrnqh0/subnets/subnet-6gf6cbed"
+    "name" = "subnet-6gf6cbed"
+    "private_endpoint_network_policies_enabled" = true
+    "private_link_service_network_policies_enabled" = true
+    "resource_group_name" = "vnet-rg"
+    "service_endpoint_policy_ids" = toset(null) /* of string */
+    "service_endpoints" = toset(null) /* of string */
+    "timeouts" = null /* object */
+    "virtual_network_name" = "vnet-vwtrnqh0"
+  }
+
+vnet = {
+  "address_space" = tolist([
+    "10.19.0.0/16",
+  ])
+  "bgp_community" = ""
+  "ddos_protection_plan" = tolist([])
+  "dns_servers" = tolist([])
+  "edge_zone" = ""
+  "flow_timeout_in_minutes" = 0
+  "guid" = "3e7b1ade-20f4-4957-9c61-8074dfac2775"
+  "id" = "/subscriptions/***/resourceGroups/vnet-rg/providers/Microsoft.Network/virtualNetworks/vnet-vwtrnqh0"
+  "location" = "canadacentral"
+  "name" = "vnet-vwtrnqh0"
+  "resource_group_name" = "vnet-rg"
+  "subnet" = toset([])
+  "tags" = tomap({
+    "environment" = "dev"
+  })
+  "timeouts" = null /* object */
+}
+
+```
