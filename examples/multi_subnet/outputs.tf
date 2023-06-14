@@ -1,6 +1,6 @@
 output "vnet" {
   description = "Vnet info."
-  value       = module.network.vnet 
+  value       = module.network.vnet
 }
 
 output "subnets" {

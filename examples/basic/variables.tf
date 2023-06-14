@@ -7,13 +7,13 @@
 variable "resource_group_name" {
   description = "Name of the resource group that will contain the vnet."
   type        = string
-  default = "vnet-rg"
+  default     = "vnet-rg"
 }
 
 variable "location" {
   description = "Location for all resources."
   type        = string
-  default = "canadacentral"
+  default     = "canadacentral"
 }
 
 variable "tags" {
@@ -22,5 +22,5 @@ variable "tags" {
   default = {
     "environment" = "dev"
   }
-} 
+}
 

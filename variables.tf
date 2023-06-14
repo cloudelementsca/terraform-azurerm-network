@@ -9,7 +9,7 @@
 ## ---------------------------------------------------------------------------------------------------------------------
 
 variable "resource_group_name" {
-  description = "Name of the resource group that will contain the vnet."
+  description = "Name of existing resource group that will contain the vnet."
   type        = string
 }
 
@@ -25,11 +25,11 @@ variable "location" {
 
 variable "network" {
   description = "Vnet definition."
-  type        = object({    
+  type = object({
     address_space = list(string)
-    subnets       = optional(map(object({
-      address_prefixes    = optional(list(string))
-      name                = optional(string)      
+    subnets = optional(map(object({
+      address_prefixes = optional(list(string))
+      name             = optional(string)
       service_delegations = optional(map(object({
         name    = string
         actions = list(string)
@@ -39,9 +39,9 @@ variable "network" {
       service_endpoints                             = optional(list(string))
       service_endpoint_policy_ids                   = optional(list(string))
     })), { subnet1 = {} })
-    name                 = optional(string)
-    dns_servers          = optional(list(string), [])
-    bgp_community        = optional(string)
+    name          = optional(string)
+    dns_servers   = optional(list(string), [])
+    bgp_community = optional(string)
     ddos_protection_plan = optional(object({
       id     = string
       enable = bool
@@ -49,7 +49,7 @@ variable "network" {
     edge_zone               = optional(string)
     flow_timeout_in_minutes = optional(number)
   })
-  default     = {
+  default = {
     address_space = ["10.0.0.0/8"]
   }
 }

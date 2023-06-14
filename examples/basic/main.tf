@@ -10,7 +10,7 @@ resource "azurerm_resource_group" "network_rg" {
 }
 
 module "network" {
-  source = "../../"
+  source              = "../../"
   resource_group_name = azurerm_resource_group.network_rg.name
   location            = azurerm_resource_group.network_rg.location
 }
