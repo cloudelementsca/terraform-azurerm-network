@@ -1,6 +1,6 @@
 # terraform-azurerm-network
 ## Description
-This module creates an Azure virtual network in a resource group and location that you specify. It's highly adjustable and takes the same input variables as `azurerm_virtual_network` and `azurerm_subnet` resource definitions have attributes. All attributes for the vnet and subnets are optional. The vnet output variables are maps containing all the information for the vnet and each subnet
+This module creates an Azure virtual network, and optional custom subnets, in an existing resource group and location that you specify. It's highly adjustable and takes the same input variables as `azurerm_virtual_network` and `azurerm_subnet` resource definitions have attributes. All attributes for the vnet and subnets are optional. The vnet output variables contain all the information for the vnet and subnets.
 
 ## Using the Module
 See the `examples/` folders on how to use the module.
