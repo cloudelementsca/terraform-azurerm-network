@@ -9,7 +9,7 @@
 ## ---------------------------------------------------------------------------------------------------------------------
 
 variable "resource_group_name" {
-  description = "Name of the resource group that will contain the vnet."
+  description = "Name of existing resource group that will contain the vnet."
   type        = string
 }
 
